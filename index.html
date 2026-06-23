@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aditya Thoomati — Developer & AI Engineer</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0D0D0D;
+      --surface: #141414;
+      --surface2: #1C1C1C;
+      --border: #2A2A2A;
+      --accent: #FF4D00;
+      --accent2: #FF8C5A;
+      --text: #F0EDE8;
+      --muted: #888;
+      --tag-bg: #1E1E1E;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2.5rem;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+    }
+
+    .hero-name span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+    }
+
+    .hero-desc strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-line {
+      position: absolute;
+      bottom: 3rem;
+      left: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .scroll-line::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2.5rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-heading em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .about-body p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .about-body p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 2px;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .skill-tag.hot {
+      border-color: var(--accent);
+      color: var(--accent2);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 2.5rem;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      background: var(--surface2);
+    }
+
+    .project-card.featured {
+      grid-column: span 2;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .project-client {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+    }
+
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .project-card.featured .project-title {
+      font-size: 1.6rem;
+    }
+
+    .project-desc {
+      color: var(--muted);
+      font-size: 0.875rem;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-card.featured .project-desc {
+      max-width: 680px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-tag {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    /* EDUCATION */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .edu-item {
+      padding: 2rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: start;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+
+    .edu-item:last-child { border-bottom: none; }
+    .edu-item:hover { background: var(--surface); }
+
+    .edu-degree {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .edu-school {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .edu-status {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .edu-status.done {
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      border: 1px solid var(--border);
+      padding: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .contact-heading {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .contact-heading span { color: var(--accent); }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 1rem 1.5rem;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .contact-link-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero { padding: 7rem 1.25rem 4rem; }
+      section { padding: 4rem 1.25rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.featured { grid-column: span 1; }
+      .contact-wrap { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+      .scroll-line { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">AT</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-eyebrow">Developer & AI Engineer · Hyderabad</p>
+    <h1 class="hero-name">
+      Aditya
+      <span>Thoomati</span>
+    </h1>
+    <p class="hero-desc">
+      I build things that make <strong>data useful</strong> — pipelines that surface gaps in music royalties, AI agents that explain business metrics in plain language, and lean tools that move the needle for real businesses.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">See my work</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+    <div class="scroll-line">Scroll</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Projects</p>
+
+    <div class="projects-grid">
+
+      <!-- Featured -->
+      <div class="project-card featured">
+        <p class="project-client">Tritone Analytics · New York / Portland</p>
+        <h2 class="project-title">Royalty Gap Analysis Pipeline</h2>
+        <p class="project-desc">
+          Built a data pipeline to identify unpaid music royalties by cross-referencing mechanical licensing data, Spotify stream estimates, and actual artist payouts. Processed hundreds of gigabytes of data to surface compensation gaps across entire artist catalogues — uncovering roughly <strong>$40,000/year in unpaid royalties</strong> owed to artists and writers missing from royalty chains. Also built a chat interface so the team could query the dataset and generate charts on demand.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Clickhouse</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Pandas</span>
+          <span class="project-tag">Data Engineering</span>
+          <span class="project-tag">AWS Bedrock</span>
+          <span class="project-tag">Chat Interface</span>
+        </div>
+      </div>
+
+      <!-- AI Agents -->
+      <div class="project-card">
+        <p class="project-client">Data Actions · Startup</p>
+        <h2 class="project-title">AI Analytics Agent System</h2>
+        <p class="project-desc">
+          Built an AI-powered analytics system with multiple agents and custom FastMCP tools over a semantic data layer. Implemented tool use / function calling, ReAct reasoning loops, multi-agent orchestration, structured JSON outputs, and long-term agent memory backed by a vector store. Users query business metrics in plain language and get answers with charts; a graph-based root cause analysis agent — built on a decision context graph — pinpoints which dimension or lever is driving a given anomaly.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">FastAPI</span>
+          <span class="project-tag">FastMCP</span>
+          <span class="project-tag">LangGraph</span>
+          <span class="project-tag">Agno</span>
+          <span class="project-tag">LangChain</span>
+          <span class="project-tag">Langfuse</span>
+          <span class="project-tag">MCP Servers</span>
+          <span class="project-tag">Python</span>
+        </div>
+      </div>
+
+      <!-- Salon -->
+      <div class="project-card">
+        <p class="project-client">Freelance · Hyderabad</p>
+        <h2 class="project-title">Salon — Data & Web Overhaul</h2>
+        <p class="project-desc">
+          Analysed CRM data from Fresha to identify high-performing customer segments and seasonal trends. Rebuilt the website from scratch with strong SEO, premium content, and targeted CTAs — including a WhatsApp offer flow that converted site visitors into direct enquiries. Polished the Google Business profile to improve local discovery. Result: daily revenue is up, enquiry quality improved, and the owner is now planning to open a second location within six months.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Pandas</span>
+          <span class="project-tag">HTML/CSS</span>
+          <span class="project-tag">SEO</span>
+          <span class="project-tag">GitHub Pages</span>
+          <span class="project-tag">Google Ads</span>
+        </div>
+      </div>
+
+      <!-- LLM Fine-tuning -->
+      <div class="project-card">
+        <p class="project-client">IIT Madras · MTech AI & ML</p>
+        <h2 class="project-title">Fine-tuning LLMs, Vision & Audio Models</h2>
+        <p class="project-desc">
+          Research and implementation work on fine-tuning large language models, vision models, and audio models as part of the MTech programme at IIT Madras. Applied LoRA and QLoRA for parameter-efficient fine-tuning, and worked with seq2seq architectures alongside the Hugging Face ecosystem.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">LoRA / QLoRA</span>
+          <span class="project-tag">Seq2Seq</span>
+          <span class="project-tag">Hugging Face</span>
+          <span class="project-tag">PyTorch</span>
+          <span class="project-tag">Python</span>
+        </div>
+      </div>
+
+      <!-- RAG Internship -->
+      <div class="project-card">
+        <p class="project-client">Internship · AI Consultant · Feb – Sep 2023</p>
+        <h2 class="project-title">RAG Systems & AI POC Development</h2>
+        <p class="project-desc">
+          Built multiple proof-of-concept AI systems during a 7-month internship with an independent AI consultant. Projects included document Q&A pipelines, knowledge base chatbots, and natural language data retrieval agents — each built on RAG architectures with vector search, embedding pipelines, and LLM orchestration. Deployed on GCP.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">RAG</span>
+          <span class="project-tag">LangChain</span>
+          <span class="project-tag">LlamaIndex</span>
+          <span class="project-tag">ChromaDB</span>
+          <span class="project-tag">Qdrant</span>
+          <span class="project-tag">pgvector</span>
+          <span class="project-tag">GCP</span>
+          <span class="project-tag">Python</span>
+        </div>
+      </div>
+
+      <!-- POC Chatbots -->
+      <div class="project-card">
+        <p class="project-client">Freelance · Multiple Clients</p>
+        <h2 class="project-title">RAG Chatbots for Business Workflows</h2>
+        <p class="project-desc">
+          Built RAG-powered chatbots for clients including Waxwing.ai — ingesting internal knowledge bases into vector stores, then exposing them as chat interfaces to automate workflows and answer domain-specific queries.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">LangChain</span>
+          <span class="project-tag">OpenAI API</span>
+          <span class="project-tag">ChromaDB</span>
+          <span class="project-tag">RAG</span>
+          <span class="project-tag">Python</span>
+        </div>
+      </div>
+
+      <!-- Spudnik -->
+      <div class="project-card">
+        <p class="project-client">Freelance · Spudnik Farms</p>
+        <h2 class="project-title">E-Commerce Site — Laravel</h2>
+        <p class="project-desc">
+          Picked up a stalled custom Laravel e-commerce site and got it across the line with another developer. Inherited an incomplete codebase, identified what was left, and shipped a working storefront for the client.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Laravel</span>
+          <span class="project-tag">PHP</span>
+          <span class="project-tag">E-Commerce</span>
+        </div>
+      </div>
+
+      <!-- Kanban -->
+      <div class="project-card">
+        <p class="project-client">IIT Madras · App Dev</p>
+        <h2 class="project-title">Kanban App — Full Stack</h2>
+        <p class="project-desc">
+          Full-stack Kanban board with a Vue.js frontend, Flask backend, REST APIs, and automated daily report emails via background jobs.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Vue.js</span>
+          <span class="project-tag">Flask</span>
+          <span class="project-tag">REST APIs</span>
+          <span class="project-tag">Celery</span>
+        </div>
+      </div>
+
+      <!-- ML Purchase -->
+      <div class="project-card">
+        <p class="project-client">IIT Madras · ML</p>
+        <h2 class="project-title">Consumer Purchase Pattern Prediction</h2>
+        <p class="project-desc">
+          Predicted consumer purchase behaviour from an e-commerce dataset — feature engineering, model selection, and evaluation.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag">Python</span>
+          <span class="project-tag">Pandas</span>
+          <span class="project-tag">Scikit-learn</span>
+          <span class="project-tag">NumPy</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div>
+        <h2 class="about-heading">
+          Developer with a <em>builder's</em> instinct
+        </h2>
+        <div class="about-body">
+          <p>
+            I'm a developer and AI engineer currently pursuing an <strong>MTech in AI & ML at IIT Madras</strong>, where I also completed my B.S. in Data Science and Programming with a CGPA of 8.19.
+          </p>
+          <p>
+            My background is unusual. Before going deep on tech, I spent three years as a <strong>Growth Marketer at Chargebee</strong> — growing the inbound lead funnel by <strong>180%</strong> through SEO, shipping growth tools, and running campaigns that got product people to rethink their build-vs-buy decisions. That context shapes how I think about what I build: I'm not just writing code, I'm solving problems that matter to a business.
+          </p>
+          <p>
+            Alongside the tech work, I help run a small family agro-tech venture focused on fruit production and food processing for export — which is where a lot of my interest in applying data and AI to real-world operations comes from.</p>
+          <p>
+            I take on freelance projects and am open to full-time roles where I can work on <strong>data engineering, AI agents, or applied ML</strong> — especially in early-stage or product-focused teams.
+          </p>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); margin-bottom:1.25rem; font-weight:500;">Stack</p>
+        <div class="skills-grid">
+          <span class="skill-tag hot">Python</span>
+          <span class="skill-tag hot">LangChain</span>
+          <span class="skill-tag hot">LangGraph</span>
+          <span class="skill-tag hot">LlamaIndex</span>
+          <span class="skill-tag hot">FastAPI</span>
+          <span class="skill-tag hot">Agno</span>
+          <span class="skill-tag hot">Clickhouse</span>
+          <span class="skill-tag hot">MCP Servers</span>
+          <span class="skill-tag hot">FastMCP</span>
+          <span class="skill-tag hot">RAG</span>
+          <span class="skill-tag">Vertex AI</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">Cloud Run</span>
+          <span class="skill-tag">Cloud Storage</span>
+          <span class="skill-tag">AWS S3</span>
+          <span class="skill-tag">AWS Lambda</span>
+          <span class="skill-tag">AWS Bedrock</span>
+          <span class="skill-tag">ChromaDB</span>
+          <span class="skill-tag">Qdrant</span>
+          <span class="skill-tag">pgvector</span>
+          <span class="skill-tag">Hugging Face</span>
+          <span class="skill-tag">LoRA / QLoRA</span>
+          <span class="skill-tag">Sentence Transformers</span>
+          <span class="skill-tag">Cohere Embed</span>
+          <span class="skill-tag">Streamlit</span>
+          <span class="skill-tag">Plotly</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">dbt</span>
+          <span class="skill-tag">Kafka</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">asyncio</span>
+          <span class="skill-tag">pytest</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">BeautifulSoup</span>
+          <span class="skill-tag">Gemini API</span>
+          <span class="skill-tag">Anthropic API</span>
+          <span class="skill-tag">Ollama</span>
+          <span class="skill-tag">Langfuse</span>
+          <span class="skill-tag">LLM Evals</span>
+          <span class="skill-tag">Prompt Engineering</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">Vue.js</span>
+          <span class="skill-tag">Chart.js</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">Celery</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Jupyter</span>
+          <span class="skill-tag">n8n</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-label">Education</p>
+    <div class="edu-list">
+      <div class="edu-item">
+        <div>
+          <p class="edu-degree">M.Tech in AI & ML</p>
+          <p class="edu-school">IIT Madras</p>
+        </div>
+        <p class="edu-status">Currently Pursuing</p>
+      </div>
+      <div class="edu-item">
+        <div>
+          <p class="edu-degree">B.S. in Data Science & Programming</p>
+          <p class="edu-school">IIT Madras · CGPA 8.19</p>
+        </div>
+        <p class="edu-status done">2021 – 2025</p>
+      </div>
+      <div class="edu-item">
+        <div>
+          <p class="edu-degree">B.Sc. in Geology, Economics & Statistics</p>
+          <p class="edu-school">Dr. B.R. Ambedkar Open University, Hyderabad</p>
+        </div>
+        <p class="edu-status done">2019 – 2022</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Contact</p>
+    <div class="contact-wrap">
+      <div>
+        <h2 class="contact-heading">
+          Let's build something <span>useful.</span>
+        </h2>
+        <p style="color:var(--muted); font-size:0.9rem; margin-top:1.25rem; line-height:1.7;">
+          Open to freelance projects and full-time roles in data engineering, AI agents, and applied ML.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:aditya@thoomati.com" class="contact-link">
+          <div>
+            <span class="contact-link-label">Email</span>
+            aditya@thoomati.com
+          </div>
+        </a>
+        <a href="https://github.com/adivik2000" target="_blank" rel="noopener" class="contact-link">
+          <div>
+            <span class="contact-link-label">GitHub</span>
+            github.com/adivik2000
+          </div>
+        </a>
+        <a href="tel:+918939719132" class="contact-link">
+          <div>
+            <span class="contact-link-label">Phone</span>
+            +91 89397 19132
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Aditya Thoomati · Hyderabad</span>
+    <span>aditya@thoomati.com</span>
+  </footer>
+
+</body>
+</html>
